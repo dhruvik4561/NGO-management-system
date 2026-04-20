@@ -1,4 +1,6 @@
 import { Router } from 'express'
+import Razorpay from 'razorpay'
+import crypto from 'crypto'
 import { requireAuth } from '../middleware/auth.js'
 import { User } from '../models/User.js'
 import { Campaign } from '../models/Campaign.js'
@@ -8,6 +10,13 @@ import { buildInvoiceEmailHtml } from '../utils/invoiceMail.js'
 import { sendMail } from '../config/mailer.js'
 
 const router = Router()
+
+function getRazorpay() {
+  return new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID || '',
+    key_secret: process.env.RAZORPAY_KEY_SECRET || ''
+  })
+}
 
 router.get('/me', requireAuth, async (req, res) => {
   try {
@@ -71,6 +80,21 @@ router.post('/', requireAuth, async (req, res) => {
     }
 
     const invoiceId = makeInvoiceId()
+
+    // Create Razorpay Order
+    let razorpayOrder = null
+    try {
+      const razorpay = getRazorpay()
+      razorpayOrder = await razorpay.orders.create({
+        amount: amount * 100, // strictly in paise
+        currency: 'INR',
+        receipt: invoiceId,
+      })
+    } catch (rzpErr) {
+      console.error('Razorpay order creation failed:', rzpErr)
+      return res.status(500).json({ message: 'Failed to initiate payment with provider' })
+    }
+
     const donation = await Donation.create({
       invoiceId,
       userId: user._id,
@@ -79,41 +103,14 @@ router.post('/', requireAuth, async (req, res) => {
       currency: 'INR',
       frequency,
       paymentMethod: pm,
-      status: 'completed',
+      status: 'pending', // Save as pending first
       donorSnapshot: { name: user.name, email: user.email },
     })
 
-    campaign.raisedAmount += amount;
-    await campaign.save();
-
-    const paidAt = new Date(donation.createdAt).toLocaleString('en-IN', {
-      dateStyle: 'medium',
-      timeStyle: 'short',
-    })
-
-    try {
-      const html = buildInvoiceEmailHtml({
-        invoiceId,
-        donorName: user.name,
-        donorEmail: user.email,
-        campaignTitle: campaign.title,
-        amount,
-        currency: 'INR',
-        frequency,
-        paymentMethod: pm,
-        paidAt,
-      })
-      await sendMail({
-        to: user.email,
-        subject: `Donation receipt ${invoiceId}`,
-        text: `Thank you. Invoice ${invoiceId} for INR ${amount} to ${campaign.title}.`,
-        html,
-      })
-    } catch (mailErr) {
-      console.error('Invoice email failed', mailErr)
-    }
-
     return res.status(201).json({
+      amount: razorpayOrder.amount,
+      currency: razorpayOrder.currency,
+      orderId: razorpayOrder.id,
       donation: {
         id: String(donation._id),
         invoiceId: donation.invoiceId,
@@ -127,7 +124,88 @@ router.post('/', requireAuth, async (req, res) => {
     })
   } catch (err) {
     console.error(err)
-    return res.status(500).json({ message: 'Payment could not be completed' })
+    return res.status(500).json({ message: 'Payment could not be initiated' })
+  }
+})
+
+router.post('/verify', requireAuth, async (req, res) => {
+  try {
+    const { razorpay_payment_id, razorpay_order_id, razorpay_signature, donationId } = req.body
+
+    const donation = await Donation.findById(donationId).populate('campaignId')
+    if (!donation) {
+      return res.status(404).json({ message: 'Donation not found' })
+    }
+
+    if (donation.status === 'completed') {
+      return res.status(400).json({ message: 'Payment already verified' })
+    }
+
+    const shasum = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+    shasum.update(`${razorpay_order_id}|${razorpay_payment_id}`)
+    const digest = shasum.digest('hex')
+
+    if (digest !== razorpay_signature) {
+      donation.status = 'failed'
+      await donation.save()
+      return res.status(400).json({ message: 'Transaction not legit!' })
+    }
+
+    // Payment legit
+    donation.status = 'completed'
+    await donation.save()
+
+    const campaign = donation.campaignId
+    if (campaign) {
+      campaign.raisedAmount += donation.amount
+      await campaign.save()
+    }
+
+    const user = await User.findById(donation.userId)
+
+    const paidAt = new Date(donation.createdAt).toLocaleString('en-IN', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    })
+
+    try {
+      const html = buildInvoiceEmailHtml({
+        invoiceId: donation.invoiceId,
+        donorName: user.name,
+        donorEmail: user.email,
+        campaignTitle: campaign ? campaign.title : 'General Fund',
+        amount: donation.amount,
+        currency: 'INR',
+        frequency: donation.frequency,
+        paymentMethod: donation.paymentMethod,
+        paidAt,
+      })
+      await sendMail({
+        to: user.email,
+        subject: `Donation receipt ${donation.invoiceId}`,
+        text: `Thank you. Invoice ${donation.invoiceId} for INR ${donation.amount}.`,
+        html,
+      })
+    } catch (mailErr) {
+      console.error('Invoice email failed', mailErr)
+    }
+
+    return res.status(200).json({
+      success: true,
+      donation: {
+        id: String(donation._id),
+        invoiceId: donation.invoiceId,
+        amount: donation.amount,
+        currency: donation.currency,
+        frequency: donation.frequency,
+        paymentMethod: donation.paymentMethod,
+        status: donation.status,
+        campaignTitle: campaign ? campaign.title : '',
+      },
+    })
+  } catch (err) {
+    console.error('Verification error:', err)
+    return res.status(500).json({ message: 'Verification failed' })
   }
 })
 

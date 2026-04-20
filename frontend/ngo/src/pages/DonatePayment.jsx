@@ -14,6 +14,24 @@ export default function DonatePayment() {
   const [submitErr, setSubmitErr] = useState('')
   const [success, setSuccess] = useState(null)
   const [busy, setBusy] = useState(false)
+  const [razorpayLoaded, setRazorpayLoaded] = useState(false)
+
+  useEffect(() => {
+    const loadRazorpay = () => {
+      if (document.getElementById('razorpay-sdk')) {
+        setRazorpayLoaded(true)
+        return
+      }
+      const script = document.createElement('script')
+      script.id = 'razorpay-sdk'
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js'
+      script.async = true
+      script.onload = () => setRazorpayLoaded(true)
+      script.onerror = () => setSubmitErr('Failed to load Razorpay payment gateway')
+      document.body.appendChild(script)
+    }
+    loadRazorpay()
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -44,8 +62,15 @@ export default function DonatePayment() {
       setSubmitErr('Enter a valid amount')
       return
     }
+
+    if (!razorpayLoaded) {
+      setSubmitErr('Razorpay SDK is still loading. Please wait or refresh.')
+      return
+    }
+
     setBusy(true)
     try {
+      // 1. Create order on backend (which also creates the initial donation record)
       const data = await api('/api/donations', {
         method: 'POST',
         body: JSON.stringify({
@@ -55,11 +80,62 @@ export default function DonatePayment() {
           paymentMethod,
         }),
       })
-      setSuccess(data.donation)
+
+      if (!data.orderId) {
+        throw new Error('No Razorpay order ID returned from backend')
+      }
+
+      // 2. Open Razorpay Checkout Checkout
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || '',
+        amount: data.amount,
+        currency: data.currency,
+        name: 'Samarpan NGO',
+        description: `Donation for ${data.donation.campaignTitle}`,
+        order_id: data.orderId,
+        handler: async function (response) {
+          try {
+            // 3. Verify payment on backend
+            const verifyData = await api('/api/donations/verify', {
+              method: 'POST',
+              body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+                donationId: data.donation.id
+              }),
+            })
+            setSuccess(verifyData.donation)
+          } catch (err) {
+            setSubmitErr(err.message || 'Payment verification failed')
+          }
+        },
+        prefill: {
+          name: user?.name || '',
+          email: user?.email || '',
+        },
+        theme: {
+          color: '#059669', // Emerald 600
+        },
+        modal: {
+          ondismiss: function () {
+            setSubmitErr('Payment cancelled')
+            setBusy(false)
+          }
+        }
+      }
+
+      const rzp = new window.Razorpay(options)
+      rzp.on('payment.failed', function (response) {
+        setSubmitErr(response.error.description || 'Payment failed')
+      })
+      rzp.open()
+
     } catch (ex) {
-      setSubmitErr(ex.message || 'Payment failed')
+      setSubmitErr(ex.message || 'Payment initiation failed')
     } finally {
-      setBusy(false)
+      // Don't set busy to false here because Razorpay modal handles the async user flow
+      setBusy(false) 
     }
   }
 
@@ -248,13 +324,11 @@ export default function DonatePayment() {
               <option value="card">Credit / debit card</option>
               <option value="upi">UPI</option>
               <option value="netbanking">Net banking</option>
-              <option value="wallet">Wallet</option>
             </select>
           </label>
 
           <p className="mb-4 text-xs leading-normal text-slate-500">
-            Payments are simulated for this demo. No card is charged; a completed donation and email
-            receipt are created in the system.
+            Secure payments processed by Razorpay.
           </p>
 
           <button

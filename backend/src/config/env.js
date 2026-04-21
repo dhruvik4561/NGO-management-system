@@ -1,8 +1,3 @@
-/**
- * All configuration comes from `backend/.env` (loaded via dotenv in server.js).
- * Do not hardcode ports, MongoDB URI, or URLs here.
- */
-
 function required(name) {
   const v = process.env[name]
   if (v === undefined || v === '') {

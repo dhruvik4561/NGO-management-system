@@ -9,10 +9,10 @@ const campaignSchema = new mongoose.Schema(
     goalAmount: { type: Number, default: 0 },
     coverImageUrl: { type: String, trim: true, default: '' },
     imageUrls: [{ type: String, trim: true }],
-    category: { 
-      type: String, 
-      enum: ['education', 'disaster', 'healthcare', 'womens-safety', 'general'], 
-      default: 'general' 
+    category: {
+      type: String,
+      enum: ['education', 'disaster', 'healthcare', 'womens-safety', 'general'],
+      default: 'general'
     },
     isActive: { type: Boolean, default: true },
     startDate: { type: Date, default: null },

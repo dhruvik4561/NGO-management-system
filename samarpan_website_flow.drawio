@@ -1,0 +1,420 @@
+<mxfile host="app.diagrams.net" modified="2026-04-20T18:00:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="samarpan-flow" name="Samarpan NGO - Website Flow">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== TITLE ===== -->
+        <mxCell id="title" value="Samarpan NGO — Website Flow Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#1B5E20;" vertex="1" parent="1">
+          <mxGeometry x="527" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== LEGEND ===================== -->
+        <mxCell id="leg_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="200" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_title" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="28" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" value="Public Page" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="30" y="55" width="120" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" value="Auth Flow" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="30" y="90" width="120" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" value="Protected Page (User)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="30" y="125" width="120" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" value="Admin Page" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="30" y="160" width="120" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5" value="Decision / Gate" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="30" y="193" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== ENTRY POINT ===================== -->
+        <mxCell id="user_visit" value="User Visits Website" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1B5E20;strokeColor=#1B5E20;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="727" y="80" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== NAVBAR / HOME ===================== -->
+        <mxCell id="navbar" value="Navbar (Global)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="727" y="190" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="home" value="Home Page ( / )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="727" y="295" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: visit -> navbar -->
+        <mxCell id="e_visit_navbar" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="user_visit" target="navbar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Arrow: navbar -> home -->
+        <mxCell id="e_navbar_home" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="navbar" target="home" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== AUTH FLOW ===================== -->
+        <mxCell id="auth_trigger" value="Click Login / Sign Up" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="190" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="auth_modal" value="Auth Modal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="295" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="auth_mode" value="Mode?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="395" width="148" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Login Branch -->
+        <mxCell id="login_form" value="Login Form&#xa;(Email + Password)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="540" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="otp_verify" value="OTP Verification&#xa;(6-digit code)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="640" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="login_gate" value="Auth OK?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="76" y="740" width="128" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Register Branch -->
+        <mxCell id="reg_form" value="Register Form&#xa;(Name / Email / Pwd)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="250" y="540" width="150" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Forgot Password Branch -->
+        <mxCell id="forgot_form" value="Forgot Password&#xa;(Send Reset Code)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="540" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="reset_otp" value="Enter OTP +&#xa;New Password" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="640" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Admin Branch -->
+        <mxCell id="admin_login_form" value="Admin Login&#xa;(Username + Pwd)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="590" y="540" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Auth arrows -->
+        <mxCell id="e_navbar_auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="navbar" target="auth_trigger" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_auth_modal" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="auth_trigger" target="auth_modal" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_modal_mode" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="auth_modal" target="auth_mode" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mode_login" value="Login" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="auth_mode" target="login_form" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_login_otp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="login_form" target="otp_verify" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="615" />
+              <mxPoint x="140" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_otp_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="otp_verify" target="login_gate" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mode_reg" value="Register" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="auth_mode" target="reg_form" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mode_forgot" value="Forgot Pwd" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="auth_mode" target="forgot_form" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_forgot_reset" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="forgot_form" target="reset_otp" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_reset_login" value="Reset OK" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;" edge="1" source="reset_otp" target="login_form" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mode_admin" value="Admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="auth_mode" target="admin_login_form" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_reg_back" value="→ Login" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;" edge="1" source="reg_form" target="login_form" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Login gate outcomes -->
+        <mxCell id="user_logged_in" value="User Logged In" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="76" y="870" width="128" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="login_fail" value="Show Error" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="755" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gate_ok" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="login_gate" target="user_logged_in" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gate_fail" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="login_gate" target="login_fail" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Admin Gate -->
+        <mxCell id="admin_gate" value="Admin Auth OK?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="596" y="640" width="128" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e_admin_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_login_form" target="admin_gate" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== ADMIN PANEL ===================== -->
+        <mxCell id="admin_panel" value="Admin Panel ( /admin )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="780" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_dashboard" value="Admin Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="430" y="900" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_campaigns" value="Campaigns Mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="590" y="900" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_events" value="Events Mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="750" y="900" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_blogs" value="Blogs Mgmt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="910" y="900" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_payments" value="Payments View" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="900" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_apps" value="Applications" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="900" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="admin_reports" value="Reports" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="900" width="150" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_admin_ok" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_gate" target="admin_panel" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_panel_dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_panel" target="admin_dashboard" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_panel_camp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_panel" target="admin_campaigns" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_panel_evt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_panel" target="admin_events" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_panel_blg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_panel" target="admin_blogs" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_panel_pay" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_panel" target="admin_payments" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_panel_apps" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_panel" target="admin_apps" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_panel_rep" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="admin_panel" target="admin_reports" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== PUBLIC PAGES FROM HOME ===================== -->
+
+        <!-- ABOUT US -->
+        <mxCell id="about" value="About Us ( /about )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="550" y="420" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_home_about" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="home" target="about" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PROGRAMS -->
+        <mxCell id="programs" value="Programs ( /programs )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="730" y="420" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="prog_edu" value="Education&#xa;( /programs/education )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="620" y="530" width="155" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="prog_health" value="Healthcare&#xa;( /programs/healthcare )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="780" y="530" width="155" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="prog_disaster" value="Disaster Mgmt&#xa;( /programs/disaster-management )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="530" width="165" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="prog_women" value="Women's Safety&#xa;( /programs/womens-safety )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="530" width="155" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_home_prog" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="home" target="programs" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_prog_edu" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="programs" target="prog_edu" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_prog_health" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="programs" target="prog_health" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_prog_disaster" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="programs" target="prog_disaster" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_prog_women" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="programs" target="prog_women" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- GET INVOLVED -->
+        <mxCell id="get_involved" value="Get Involved ( /get-involved )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="910" y="420" width="185" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="internship" value="Internship&#xa;( /get-involved/internship )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="530" width="155" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="volunteer" value="Volunteer Register&#xa;( /get-involved/volunteer )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="530" width="155" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="e_home_inv" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="home" target="get_involved" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_inv_intern" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="get_involved" target="internship" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_inv_vol" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="get_involved" target="volunteer" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Vol application goes to admin -->
+        <mxCell id="e_vol_admin" value="Application → Admin Review" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;endArrow=open;" edge="1" source="volunteer" target="admin_apps" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== DONATE FLOW ===================== -->
+        <mxCell id="donate_page" value="Donate ( /donate )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="727" y="650" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="campaign_detail" value="Campaign Detail&#xa;( /campaigns/:slug )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="960" y="720" width="165" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="donate_gate" value="Logged In?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="735" y="745" width="128" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="donate_payment" value="Donate Payment&#xa;( /donate/:campaignId/pay )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="727" y="870" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="razorpay" value="Razorpay Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="727" y="975" width="200" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="payment_success" value="Payment Success&#xa;/ Failure Toast" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="727" y="1080" width="200" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_home_donate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="home" target="donate_page" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_donate_camp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="donate_page" target="campaign_detail" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_donate_gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="donate_page" target="donate_gate" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gate_yes" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="donate_gate" target="donate_payment" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gate_no" value="No → Login" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;" edge="1" source="donate_gate" target="auth_modal" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pay_rp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="donate_payment" target="razorpay" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_rp_result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="razorpay" target="payment_success" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- payment result goes to admin payments -->
+        <mxCell id="e_rp_admin" value="Record Payment" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;endArrow=open;" edge="1" source="razorpay" target="admin_payments" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== EVENTS ===================== -->
+        <mxCell id="events_page" value="Events ( /events )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="295" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_home_events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="home" target="events_page" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- admin events link -->
+        <mxCell id="e_events_admin" value="CRUD via Admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;endArrow=open;" edge="1" source="events_page" target="admin_events" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== NEWS / BLOGS ===================== -->
+        <mxCell id="news_page" value="News &amp; Blogs ( /news )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="295" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="blog_detail" value="Blog Detail&#xa;( /news/:slug )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="395" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_home_news" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="home" target="news_page" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_news_detail" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="news_page" target="blog_detail" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_news_admin" value="CRUD via Admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;endArrow=open;" edge="1" source="news_page" target="admin_blogs" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== MEDIA ===================== -->
+        <mxCell id="media_page" value="Media ( /media )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="295" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_home_media" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="home" target="media_page" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== CONTACT ===================== -->
+        <mxCell id="contact_page" value="Contact Us ( /contact )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="395" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_home_contact" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="home" target="contact_page" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== USER PROTECTED PAGES ===================== -->
+        <mxCell id="user_dash" value="User Dashboard ( /dashboard )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="76" y="980" width="205" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="user_profile" value="Profile ( /profile )" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="76" y="1040" width="205" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="e_loggedin_dash" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="user_logged_in" target="user_dash" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dash_profile" style="edgeStyle=orthogonalEdgeStyle;rounded=0;" edge="1" source="user_dash" target="user_profile" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Donation history on dashboard -->
+        <mxCell id="e_dash_donate" value="View Donation History" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;endArrow=open;" edge="1" source="user_dash" target="payment_success" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== FOOTER ===================== -->
+        <mxCell id="footer" value="Footer (Global)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="727" y="1140" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_footer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;" edge="1" source="home" target="footer" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===================== SECTION LABELS ===================== -->
+        <mxCell id="lbl_auth" value="AUTH FLOW" style="text;html=1;strokeColor=none;fillColor=#fff2cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="60" y="155" width="380" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_pub" value="PUBLIC PAGES" style="text;html=1;strokeColor=none;fillColor=#dae8fc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="530" y="155" width="1000" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_admin" value="ADMIN PANEL (AdminRoute Protected)" style="text;html=1;strokeColor=none;fillColor=#f8cecc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="430" y="860" width="1150" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_user" value="USER PROTECTED PAGES (ProtectedRoute)" style="text;html=1;strokeColor=none;fillColor=#d5e8d4;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="60" y="950" width="240" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_donate" value="DONATION FLOW (Razorpay)" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=3;strokeColor=#388E3C;" vertex="1" parent="1">
+          <mxGeometry x="700" y="620" width="260" height="25" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

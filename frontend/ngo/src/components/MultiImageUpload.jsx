@@ -13,11 +13,11 @@ export default function MultiImageUpload({ imageUrls = [], onChange, className }
     try {
       const newUrls = []
       const token = localStorage.getItem('token') || sessionStorage.getItem('token')
-      
+
       const uploadPromises = files.map(async (file) => {
         const formData = new FormData()
         formData.append('image', file)
-        
+
         const response = await fetch('http://localhost:5000/api/upload', {
           method: 'POST',
           headers: {
@@ -64,14 +64,14 @@ export default function MultiImageUpload({ imageUrls = [], onChange, className }
           ))}
         </div>
       )}
-      
+
       <div className="flex flex-col gap-1">
         <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-4 py-2 rounded-lg border border-slate-300 w-fit transition-colors">
           {uploading ? 'Uploading...' : 'Add Gallery Image'}
-          <input 
-            type="file" 
-            accept="image/*" 
-            className="hidden" 
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
             multiple
             onChange={handleFileChange}
             disabled={uploading}

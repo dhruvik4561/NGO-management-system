@@ -445,6 +445,7 @@ router.get('/applications', async (_req, res) => {
         interest: a.interest,
         message: a.message,
         kind: a.kind,
+        status: a.status,
         event: a.eventId ? { id: String(a.eventId._id), title: a.eventId.title } : null,
         createdAt: a.createdAt,
       })),
@@ -452,6 +453,30 @@ router.get('/applications', async (_req, res) => {
   } catch (err) {
     console.error(err)
     return res.status(500).json({ message: 'Could not load applications' })
+  }
+})
+
+router.patch('/applications/:id/status', async (req, res) => {
+  try {
+    const { status } = req.body
+    if (!['pending', 'approved', 'rejected'].includes(status)) {
+      return res.status(400).json({ message: 'Invalid status' })
+    }
+    const app = await VolunteerApplication.findById(req.params.id)
+    if (!app) return res.status(404).json({ message: 'Not found' })
+    
+    app.status = status
+    await app.save()
+    
+    return res.json({
+      application: {
+        id: String(app._id),
+        status: app.status
+      }
+    })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ message: 'Could not update status' })
   }
 })
 

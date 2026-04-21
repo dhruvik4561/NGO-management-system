@@ -8,6 +8,7 @@ const volunteerApplicationSchema = new mongoose.Schema(
     interest: { type: String, trim: true, default: '' },
     message: { type: String, trim: true, default: '' },
     kind: { type: String, enum: ['volunteer', 'internship'], default: 'volunteer' },
+    status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
     eventId: { type: mongoose.Schema.Types.ObjectId, ref: 'Event', default: null },
   },
   { timestamps: true }

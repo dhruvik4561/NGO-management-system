@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { VolunteerApplication } from '../models/VolunteerApplication.js'
+import { requireAuth } from '../middleware/auth.js'
 
 const router = Router()
 
@@ -31,6 +32,32 @@ router.post('/apply', async (req, res) => {
   } catch (err) {
     console.error(err)
     return res.status(500).json({ message: 'Could not submit application' })
+  }
+})
+
+router.get('/me', requireAuth, async (req, res) => {
+  try {
+    const list = await VolunteerApplication.find({ email: req.userEmail })
+      .sort({ createdAt: -1 })
+      .populate('eventId', 'title')
+      .lean()
+    return res.json({
+      applications: list.map((a) => ({
+        id: String(a._id),
+        name: a.name,
+        email: a.email,
+        phone: a.phone,
+        interest: a.interest,
+        message: a.message,
+        kind: a.kind,
+        status: a.status,
+        event: a.eventId ? { id: String(a.eventId._id), title: a.eventId.title } : null,
+        createdAt: a.createdAt,
+      })),
+    })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ message: 'Could not load applications' })
   }
 })
 

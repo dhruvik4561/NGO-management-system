@@ -9,11 +9,11 @@ export default function Navbar() {
   const navigate = useNavigate()
   const [menuOpen, setMenuOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
-  
+
   // Modal states
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [authModalMode, setAuthModalMode] = useState('login')
-  
+
   const profileRef = useRef(null)
 
   useEffect(() => {
@@ -136,17 +136,16 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2 lg:ml-auto">
-            <button 
-              onClick={toggleTheme} 
+            <button
+              onClick={toggleTheme}
               className="p-2 rounded-full text-slate-500 hover:bg-slate-100 transition-colors hidden sm:block mr-2 text-lg"
               title="Toggle Theme"
             >
-               <span className="hidden dark:block"><FaSun className="text-amber-500" /></span>
-               <span className="block dark:hidden"><FaMoon className="text-indigo-500" /></span>
+              <span className="hidden dark:block"><FaSun className="text-amber-500" /></span>
+              <span className="block dark:hidden"><FaMoon className="text-indigo-500" /></span>
             </button>
-            
+
             {!user ? (
-              // Changed: Replaced Link with a button that triggers the modal
               <button
                 type="button"
                 onClick={() => {
@@ -245,10 +244,10 @@ export default function Navbar() {
         </div>
       </header>
 
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
-        initialMode={authModalMode} 
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        initialMode={authModalMode}
       />
     </>
   )

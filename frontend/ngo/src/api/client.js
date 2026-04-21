@@ -1,4 +1,3 @@
-// Set in frontend/ngo/.env as VITE_API_URL (empty in dev = same-origin relative `/api`)
 const BASE = import.meta.env.VITE_API_URL ?? ''
 
 export function getToken() {

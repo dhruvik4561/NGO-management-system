@@ -19,7 +19,7 @@ export default function AdminBlogs() {
   }
 
   useEffect(() => {
-    load().catch(() => {})
+    load().catch(() => { })
   }, [])
 
   async function onCreate(e) {
@@ -99,20 +99,20 @@ export default function AdminBlogs() {
             className="resize-y rounded-lg border border-slate-300 px-2 py-2 font-inherit text-sm"
           />
         </label>
-        
+
         <div className="flex flex-col gap-1 text-xs font-semibold text-slate-600">
           Cover Image
-          <ImageUpload 
-            currentImageUrl={coverImageUrl} 
-            onUploadComplete={(url) => setCoverImageUrl(url)} 
+          <ImageUpload
+            currentImageUrl={coverImageUrl}
+            onUploadComplete={(url) => setCoverImageUrl(url)}
           />
         </div>
 
         <div className="flex flex-col gap-1 text-xs font-semibold text-slate-600">
           Additional Gallery Images
-          <MultiImageUpload 
-            imageUrls={imageUrls} 
-            onChange={setImageUrls} 
+          <MultiImageUpload
+            imageUrls={imageUrls}
+            onChange={setImageUrls}
           />
         </div>
 
